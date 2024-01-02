@@ -50,9 +50,9 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    "news_crawling.middlewares.NewsCrawlingDownloaderMiddleware": 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    "news_crawling.middlewares.NewsCrawlingDownloaderMiddleware": 543,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -64,6 +64,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     "news_crawling.pipelines.NewsCrawlingPipeline": 300,
+    "news_crawling.pipelines.JSONWriterPipeline" : 301
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -92,5 +93,5 @@ REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
-MONGODB_URI = 'localhost'
-MONGODB_PORT = 27017
+MONGO_URI = 'mongodb://localhost:27017'
+MONGO_DATABASE = 'news_db'

@@ -1,1 +1,3 @@
-__pycache__
+__pycache__/
+*.log
+news_crawling/news_crawling/__pycache__/
