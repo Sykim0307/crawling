@@ -64,7 +64,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     "news_crawling.pipelines.NewsCrawlingPipeline": 300,
-    "news_crawling.pipelines.JSONWriterPipeline" : 301
+    #"news_crawling.pipelines.JSONWriterPipeline" : 301
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
