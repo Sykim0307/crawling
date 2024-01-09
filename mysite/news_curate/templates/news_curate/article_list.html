@@ -1,0 +1,10 @@
+{% block content %}
+    <h2>  [ == Articles == ] </h2>
+    <ul>
+        {% for article in cnn_articles %}
+            <li>News Title : {{article.title}}</li>
+            <li>News URL : {{article.url}}</li>
+            <li>News Date : {{article.pubdate}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

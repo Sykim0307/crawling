@@ -87,12 +87,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default' : {
         'ENGINE' : 'djongo',
-        'NAME':'news',
+        'NAME':'news_db',
         'CLIENT': {
                 'host': '127.0.0.1',
                 'port': 27017,
-                'username': 'cubix77',
-                'password': 'sykim4549#',
+                'username': 'djangoUser',
+                'password': 'django1234',
                 'authSource': 'news_db',
                 'authMechanism': 'SCRAM-SHA-1'
             },
@@ -110,16 +110,7 @@ DATABASES = {
     }
 }
 
-""" 
-        
-        'CLIENT' : {
-            'host': '127.0.0.1',
-            'port':27017,
-            'username' : 'seongyun',
-            'password' : 'sykim4549#',
-            'authSource' : 'admin', 
-            'authMechanism' : 'SCRAM-SHA-1'
-        }"""
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

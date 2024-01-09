@@ -19,15 +19,15 @@ class Article(models.Model):
     pub_date = models.DateTimeField("date published") # 데이터 생성일
     
     class Meta: # 
-        abstract = True
-        db_table = 'django_news' # DB에 자동으로 django_news 라는 collection에 적재된다.
+        db_table  = 'django_news' # DB에 자동으로 django_news 라는 collection에 적재된다.
 
-class Entry(models.Model):
+""" class ArticleEntry(models.Model):
     news = models.EmbeddedField(
         model_container = Article
     )
+    
     headline = models.CharField(max_length = 255)
-
+ """
 
 """ 
 # 사용자가 본 뉴스 기록

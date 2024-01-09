@@ -18,6 +18,6 @@ from django.contrib import admin
 from django.urls import path , include
 
 urlpatterns = [
-    path('news/' , include('new_curate.urls')),
+    path('news_curate/' , include('news_curate.urls')),
     path('admin/', admin.site.urls),
 ]

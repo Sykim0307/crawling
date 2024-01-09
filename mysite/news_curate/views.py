@@ -3,17 +3,22 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render , get_object_or_404
 from django.template import loader
 from django.urls import reverse
-from django.views import generic
-from .models import  Entry
+from django.views.generic import ListView
+from .models import  Article
 # Create your views here.
-class IndexView(generic.ListView):
-    template_name = 'news_curate/index.html'
-    #context_object_name = 'latest_question_list'
-    
-    def get_queryset(self):
-        """Return the last five published questions.
-        """
-        return Entry.objects.order_by("-pub_date")[:5]
+class ArticleListView(ListView):
+    print("Index View Rendering")
+    try:
+        queryset=Article.objects.all()
+        print("queryset : ", queryset)
+        context_object_name  = 'cnn_articles'
+        template_name = 'article_list.html'
+        """ queryset= Article.objects.order_by('-pub_date')[:5]
+        template_name = 'news_curate/index.html'
+        context_object_name = 'latest_question_list' """
+    except Exception as e :
+        print("Error : ", e)
+        
 """ class DetailView(generic.DetailView):
     model = Question
     template_name = 'news_curate/detail.html'
