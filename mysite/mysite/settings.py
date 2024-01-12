@@ -105,7 +105,7 @@ DATABASES = {
                 }
             }
         },
-        'ENFORCE_SCHEMA' : True, 
+        'ENFORCE_SCHEMA' : False, 
         
     }
 }
