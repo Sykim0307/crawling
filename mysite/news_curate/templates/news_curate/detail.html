@@ -1,5 +1,16 @@
-<h1>{{article.title}}</h1>
-<p>{{article.content}}</p>
-</br>
-<p>Reporter : {{article.writer}} </p>
-<p>Published : {{article.published_date|date}}</p>
+{% load static %}
+<link rel='stylesheet' href = {% static 'news_curate/style.css' %}>
+
+<html>
+<body>
+    <a href = {% url 'news_curate:article-list' %}> Go Home ? </a>
+    <h1>{{article.title}}</h1>
+    <p>{{article.content}}</p>
+    </br>
+    <p>Reporter : {{article.writer}} </p>
+    <p>Published : {{article.published_date|date}}</p>
+    <a href={{article.url}}>Watch in CNN Site!</a>
+    </br>
+</body>
+
+</html>
