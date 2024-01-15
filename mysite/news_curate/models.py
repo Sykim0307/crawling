@@ -20,7 +20,7 @@ class Article(models.Model):
     class Meta: # 
         db_table  = 'django_news' # DB에 자동으로 django_news 라는 collection에 적재된다.
 
-class User(models.Model):
+class UserModel(models.Model):
     id = models.CharField(max_length=30, primary_key=True)
     nickname = models.CharField(max_length=30, unique=True)
     pwd = models.CharField(max_length=30)
@@ -42,7 +42,7 @@ class User(models.Model):
         
 class UserForm(ModelForm): # 회원가입시 이용
     class Meta:
-        model=User
+        model=UserModel
         fields='__all__'
 
 

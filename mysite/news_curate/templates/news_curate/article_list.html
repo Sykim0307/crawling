@@ -1,12 +1,9 @@
-{% load static %}
-<link rel='stylesheet' href = {% static 'news_curate/style.css' %}>
+{% extends 'news_curate/base.html' %}
+{% block content %}
 
-
-<html>
-<body>
 <h3>Do you want to make a account ? <a href="{% url 'news_curate:signup' %}">Sign up</a></h3>
 <h3>Do you have already account ? <a href="{% url 'news_curate:signin' %}">Sign in</a></h3>
-
+<h3>Do you want to logout? <a href="{% url 'news_curate:logout' %}">Log out</a></h3>
 <h2>Articles</h2>
 <ul>
     {% for article in page_obj %}
@@ -34,6 +31,5 @@
     </span>
 
 </div>
-</body>
-</html>
 
+{% endblock %}
