@@ -1,0 +1,26 @@
+<!--LOG OUT VIEW-->
+{% extends 'news_curate/base.html'%}
+{% block content %}
+
+{% if form.errors %}
+<p>
+    Your username and password didn't match.
+</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+        <p>Please Logout~!
+        </p>
+    {% else %}
+        <p>I THINK NO USER? </p>
+    {% endif %}
+{% endif %}
+
+<form method='post' action = "{% url 'news_curate:logout' %}">
+{% csrf_token %}
+<p>{{user.username}}</p>
+<input type='submit' value = 'logout' >
+<input type='hidden' name ='next' value ='{{next}}'>
+</form>
+{% endblock %}

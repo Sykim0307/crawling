@@ -1,9 +1,16 @@
 {% extends 'news_curate/base.html' %}
 {% block content %}
 
-<h3>Do you want to make a account ? <a href="{% url 'news_curate:signup' %}">Sign up</a></h3>
-<h3>Do you have already account ? <a href="{% url 'news_curate:signin' %}">Sign in</a></h3>
-<h3>Do you want to logout? <a href="{% url 'news_curate:logout' %}">Log out</a></h3>
+{% if user.is_authenticated %}
+    <h3> Hello!  , {{user.username}} </h3>
+    <h3>Do you want to logout? <a href="{% url 'news_curate:logout' %}">Log out</a></h3>
+    <h3>Do you want to go mypage? <a href="{% url 'news_curate:mypage' %}">Mypage</a></h3>
+{% else %}
+    <h3>Do you want to make a account ? <a href="{% url 'news_curate:signup' %}">Sign up</a></h3>
+    <h3>Do you have already account ? <a href="{% url 'news_curate:login' %}">Sign in</a></h3>
+
+{% endif %}
+
 <h2>Articles</h2>
 <ul>
     {% for article in page_obj %}

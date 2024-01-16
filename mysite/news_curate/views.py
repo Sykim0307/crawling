@@ -8,6 +8,7 @@ from django.views.generic.edit import FormView, CreateView
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login , authenticate, logout
+from django.contrib.auth import views as auth_views
 
 # 뉴스 리스트 뷰
 class ArticleListView(ListView): 
@@ -52,6 +53,16 @@ class LoginView(FormView):
             print(f"Log in Success ! \n - Welcome {val.username}")
             #login(request,val)
         return super().form_valid(form)
+# New Login View
+class LoginView_AUTH(auth_views.LoginView):
+    template_name = 'news_curate/account-login.html'
+    next_page = '/news_curate/'
+    
+# New Logout View
+class LogOutView_AUTH(auth_views.LogoutView):
+    template_name = 'news_curate/account-logout.html'
+    next_page = '/news_curate/'
+    
 
 #로그아웃
 def logout_view(request):
@@ -61,23 +72,24 @@ def logout_view(request):
             print("AUTH USER : ", request.user)
         else:
             print("NOT AUTH ")
-        print(request.user)
         print("===============")
         
         logout(request)  
-        return HttpResponseRedirect('/news_curate/')      
+        
 
     except Exception as e :
         print("LOG OUT ERROR ? : ", e)
-    
+    return HttpResponseRedirect('/news_curate/')  
 
 
 #마이페이지 뷰
 @login_required(login_url='/news_curate/signin')
 def mypage(request):
-    
-    return render(request, 'news_curate/mypage.html')    
-    
+    if request.user.is_authenticated:
+        print("AUTH USER : ", request.user.username)
+        return render(request, 'news_curate/mypage.html', {'user' : request.user})    
+    else:
+        print("ERROR ?? ")
 
 
 # depreacted
