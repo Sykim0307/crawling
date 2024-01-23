@@ -5,10 +5,12 @@
     <h3> Hello!  , {{user.username}} </h3>
     <h3>Do you want to logout? <a href="{% url 'news_curate:logout' %}">Log out</a></h3>
     <h3>Do you want to go mypage? <a href="{% url 'news_curate:mypage' %}">Mypage</a></h3>
+    <h3>Do you want to change password? <a href="{% url 'news_curate:password_change' %}">Change Password</a></h3>
+    
 {% else %}
     <h3>Do you want to make a account ? <a href="{% url 'news_curate:signup' %}">Sign up</a></h3>
     <h3>Do you have already account ? <a href="{% url 'news_curate:login' %}">Sign in</a></h3>
-
+    <h3>Do you forget your password?  <a href="{% url 'news_curate:password_reset' %}">Reset Password</a></h3>
 {% endif %}
 
 <h2>Articles</h2>
@@ -17,7 +19,6 @@
         <li>{{article.published_date|date}} - <a href="{% url 'news_curate:detail_test' article.slug %}">{{article.title|upper}}</a></li>
     {% empty %}
         <li>No Articles Yet.</li>    
-        
     {% endfor %}
 </ul>
 

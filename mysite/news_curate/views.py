@@ -10,20 +10,20 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login , authenticate, logout
 from django.contrib.auth import views as auth_views
 
-# 뉴스 리스트 뷰
+# Article List Page
 class ArticleListView(ListView): 
     model = Article
     queryset=Article.objects.order_by('-published_date').exclude(published_date = None )
     paginate_by = 100
-    template_name = 'news_curate/article_list.html'
+    template_name = 'news_curate/article-list.html'
 
-# 뉴스 상세페이지 뷰
+# Article Detail Page
 class ArticleDetailView(DetailView): 
     model= Article
-    template_name ='news_curate/detail.html' 
+    template_name ='news_curate/artilce-detail.html' 
     context_object_name = 'article'
     
-#회원가입 뷰
+# Sign up
 class SignUpView(FormView):
     template_name='news_curate/signup.html'
     form_class = SignUpForm
@@ -38,32 +38,48 @@ class SignUpView(FormView):
             print(f"Sing Up Success ! \n - Welcome {val}")
         return super().form_valid(form)
     
-#로그인 뷰
-class LoginView(FormView):
-    template_name = 'news_curate/signin.html'
-    form_class = LoginForm
-    success_url = '/news_curate/'
-    
-    def form_valid(self, form):
-        print("LoginView : Form is Valid !  : ", self.request)
-        val = form.validate(self.request)
-        if val == -1 :
-            self.success_url = '/news_curate/signin'
-        else:
-            print(f"Log in Success ! \n - Welcome {val.username}")
-            #login(request,val)
-        return super().form_valid(form)
-# New Login View
+# Login
 class LoginView_AUTH(auth_views.LoginView):
     template_name = 'news_curate/account-login.html'
     next_page = '/news_curate/'
     
-# New Logout View
+# Logout
 class LogOutView_AUTH(auth_views.LogoutView):
     template_name = 'news_curate/account-logout.html'
     next_page = '/news_curate/'
     
+# Change Password
+class ChangePWD_AUTH(auth_views.PasswordChangeView):
+    template_name = 'news_curate/account-changepwd.html'
+    success_url = '/news_curate/accounts/changepwddone'
+class ChangePWDDone_AUTH(auth_views.PasswordChangeDoneView):
+    template_name = 'news_curate/account-changepwddone.html'
 
+# Reset Passwrod
+class ResetPassword_AUTH(auth_views.PasswordResetView):
+    template_name ='news_curate/account-resetpwd.html'
+    email_template_name = 'news_curate/account-resetpwd-email.html'
+    success_url = '/news_curate/accounts/resetpwddone'
+class ResetPasswordDone_AUTH(auth_views.PasswordResetDoneView):
+    template_name = 'news_curate/account-resetpwddone.html'
+class ResetPasswordConfirm_AUTH(auth_views.PasswordResetConfirmView):
+    template_name='news_curate/account-resetpwdconfirm.html'
+class ResetPasswordComplete_AUTH(auth_views.PasswordResetCompleteView):
+    template_name='news_curate/account-resetpwdcomplete.html'
+    
+# My page
+@login_required(login_url='/news_curate/accounts/login')
+def mypage(request):
+    if request.user.is_authenticated:
+        print("AUTH USER : ", request.user.username)
+        return render(request, 'news_curate/account-mypage.html', {'user' : request.user})    
+    else:
+        print("ERROR ?? ")
+
+
+# depreacted
+"""     
+   
 #로그아웃
 def logout_view(request):
     try:
@@ -80,21 +96,22 @@ def logout_view(request):
     except Exception as e :
         print("LOG OUT ERROR ? : ", e)
     return HttpResponseRedirect('/news_curate/')  
+#로그인 뷰
+class LoginView(FormView):
+    template_name = 'news_curate/signin.html'
+    form_class = LoginForm
+    success_url = '/news_curate/'
+    
+    def form_valid(self, form):
+        print("LoginView : Form is Valid !  : ", self.request)
+        val = form.validate(self.request)
+        if val == -1 :
+            self.success_url = '/news_curate/signin'
+        else:
+            print(f"Log in Success ! \n - Welcome {val.username}")
+            #login(request,val)
+        return super().form_valid(form)
 
-
-#마이페이지 뷰
-@login_required(login_url='/news_curate/signin')
-def mypage(request):
-    if request.user.is_authenticated:
-        print("AUTH USER : ", request.user.username)
-        return render(request, 'news_curate/mypage.html', {'user' : request.user})    
-    else:
-        print("ERROR ?? ")
-
-
-# depreacted
-
-"""     
 #로그인 뷰
 class LoginView(FormView):
     template_name = 'news_curate/signin.html'
