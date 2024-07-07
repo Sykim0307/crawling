@@ -17,6 +17,7 @@ class SignUpForm(forms.Form):
             return user
         except Exception as e:
             print("Sign Up Failed : ", e)
+            breakpoint()
             return -1
         
 class LoginForm(forms.Form):

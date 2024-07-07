@@ -33,7 +33,7 @@ class SignUpView(FormView):
         print("SignUpView : Form is Valid ! ")
         val = form.make_user()
         if val == -1 :
-            self.success_url = '/news_curate/signup'
+            self.success_url = '/news_curate/accounts/signup'
         else :
             print(f"Sing Up Success ! \n - Welcome {val}")
         return super().form_valid(form)
